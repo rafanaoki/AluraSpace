@@ -1,8 +1,14 @@
 import React from 'react'
 import open from './open.png'
-import favorito from './favorito.png'
+import { AiFillHeart } from 'react-icons/ai'
+import { AiOutlineHeart } from 'react-icons/ai'
 
-export default function Cards({itens, styles}) {
+export default function Cards({ itens, styles, favoritar }) {
+
+    const propsFavorito = {
+        size: 30,
+        color: '#FFF'
+    }
     return (
         <ul className={styles.galeria__cards}>
             {itens.map((foto) => {
@@ -17,7 +23,13 @@ export default function Cards({itens, styles}) {
                         <div>
                             <p>{foto.creditos}</p>
                             <span>
-                                <img src={favorito} alt='Ícone coração de curtir'></img>
+                                <div>
+                                    {
+                                        (foto.favorito) ?
+                                             <AiFillHeart {...propsFavorito} onClick={() => favoritar(foto.id)}/>
+                                            :<AiOutlineHeart {...propsFavorito} onClick={() => favoritar(foto.id)}/>
+                                    }
+                                </div>
                                 <img src={open} alt='Ícone de abrir modal'></img>
                             </span>
                         </div>
